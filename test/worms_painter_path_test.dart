@@ -1,6 +1,6 @@
 import 'dart:math';
+import 'dart:ui';
 
-import 'package:flame/components.dart';
 import 'package:forge2d_game/components/painters/worms_painter.dart';
 import 'package:test/test.dart';
 
@@ -18,94 +18,94 @@ class _WormsPainterTestCase {
     this.expectedPath,
   );
 
-  final Vector2 p2;
-  final List<Vector2> expectedPath;
+  final Offset p2;
+  final List<Offset> expectedPath;
   final String title;
 
-  Vector2 get p1 => Vector2(0, 0);
+  Offset get p1 => const Offset(0, 0);
   double get r1 => 1;
   double get r2 => 2;
 }
 
-final _testCases = [
+const _testCases = [
   _WormsPainterTestCase(
     '0˚ == alpha',
-    Vector2(5, 0),
+    Offset(5, 0),
     [
-      Vector2(0, -1),
-      Vector2(0, 1),
-      Vector2(5, 2),
-      Vector2(5, -2),
+      Offset(0, -1),
+      Offset(0, 1),
+      Offset(5, 2),
+      Offset(5, -2),
     ],
   ),
   _WormsPainterTestCase(
     '0˚ < alpha < 90˚',
-    Vector2(3, 4),
+    Offset(3, 4),
     [
-      Vector2(0.8, -0.6),
-      Vector2(-0.8, 0.6),
-      Vector2(1.4, 5.2),
-      Vector2(4.6, 2.8),
+      Offset(0.8, -0.6),
+      Offset(-0.8, 0.6),
+      Offset(1.4, 5.2),
+      Offset(4.6, 2.8),
     ],
   ),
   _WormsPainterTestCase(
     '90˚ == alpha',
-    Vector2(0, 5),
+    Offset(0, 5),
     [
-      Vector2(1, 0),
-      Vector2(-1, 0),
-      Vector2(-2, 5),
-      Vector2(2, 5),
+      Offset(1, 0),
+      Offset(-1, 0),
+      Offset(-2, 5),
+      Offset(2, 5),
     ],
   ),
   _WormsPainterTestCase(
     '90˚ < alpha < 180˚',
-    Vector2(-3, 4),
+    Offset(-3, 4),
     [
-      Vector2(0.8, 0.6),
-      Vector2(-0.8, -0.6),
-      Vector2(-4.6, 2.8),
-      Vector2(-1.4, 5.2),
+      Offset(0.8, 0.6),
+      Offset(-0.8, -0.6),
+      Offset(-4.6, 2.8),
+      Offset(-1.4, 5.2),
     ],
   ),
   _WormsPainterTestCase(
     'alpha == 180˚',
-    Vector2(-5, 0),
+    Offset(-5, 0),
     [
-      Vector2(0, 1),
-      Vector2(0, -1),
-      Vector2(-5, -2),
-      Vector2(-5, 2),
+      Offset(0, 1),
+      Offset(0, -1),
+      Offset(-5, -2),
+      Offset(-5, 2),
     ],
   ),
   _WormsPainterTestCase(
     '180˚ < alpha < 270˚',
-    Vector2(-3, -4),
+    Offset(-3, -4),
     [
-      Vector2(-0.8, 0.6),
-      Vector2(0.8, -0.6),
-      Vector2(-1.4, -5.2),
-      Vector2(-4.6, -2.8),
+      Offset(-0.8, 0.6),
+      Offset(0.8, -0.6),
+      Offset(-1.4, -5.2),
+      Offset(-4.6, -2.8),
     ],
   ),
   _WormsPainterTestCase(
     'alpha == 270˚',
-    Vector2(0, -5),
+    Offset(0, -5),
     [
-      Vector2(-1, 0),
-      Vector2(1, 0),
-      Vector2(2, -5),
-      Vector2(-2, -5),
+      Offset(-1, 0),
+      Offset(1, 0),
+      Offset(2, -5),
+      Offset(-2, -5),
     ],
   ),
   _WormsPainterTestCase(
     '270˚ < alpha < 360˚',
-    Vector2(3, -4),
+    Offset(3, -4),
     [
-      Vector2(-0.8, -0.6),
-      Vector2(0.8, 0.6),
-      Vector2(4.6, -2.8),
-      Vector2(1.4, -5.2),
+      Offset(-0.8, -0.6),
+      Offset(0.8, 0.6),
+      Offset(4.6, -2.8),
+      Offset(1.4, -5.2),
     ],
   ),
 ];
@@ -135,15 +135,15 @@ void main() {
   );
 }
 
-bool _checkEquality(List<Vector2> a, List<Vector2> b) {
+bool _checkEquality(List<Offset> a, List<Offset> b) {
   if (a.length != b.length) return false;
   for (int i = 0; i < a.length; i++) {
     final p = a[i];
     final t = b[i];
     if (1e-5 <
         max(
-          (p.x - t.x).abs(),
-          (p.y - t.y).abs(),
+          (p.dx - t.dx).abs(),
+          (p.dy - t.dy).abs(),
         )) return false;
   }
   return true;
