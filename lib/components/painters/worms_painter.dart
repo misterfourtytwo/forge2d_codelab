@@ -16,7 +16,11 @@ class WormsPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     if (draggable.dragDelta != Vector2.zero()) {
-      final dragOffset = -draggable.dragDelta.toOffset();
+      var dragOffset = -draggable.dragDelta.toOffset();
+      final initialDistance = dragOffset.distance;
+      final maxOffset = dragOffset / initialDistance * 21.0;
+      dragOffset =
+          maxOffset.distance < dragOffset.distance ? maxOffset : dragOffset;
 
       final double r2 = r1 * math.log(dragOffset.distance + math.e);
       final painterOffsetDelta = draggable.radius + offset + r1;
@@ -43,12 +47,25 @@ class WormsPainter extends CustomPainter {
         clockwise: false,
       );
       path.close();
+
       final shader = ui.Gradient.linear(
         p1,
-        p2,
+        p1 + maxOffset,
         [
           Colors.amber[300]!,
+          Colors.amber[400]!,
+          Colors.amber[600]!,
+          Colors.amber[800]!,
+          Colors.red,
           Colors.red[900]!,
+        ],
+        [
+          0,
+          1 / 5,
+          2 / 5,
+          3 / 5,
+          4 / 5,
+          5 / 5,
         ],
       );
       final paint = Paint()
