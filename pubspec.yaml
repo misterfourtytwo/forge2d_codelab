@@ -1,6 +1,6 @@
 name: forge2d_game
-description: "A new Flutter project."
-publish_to: 'none'
+description: "Flutter i/o 2024 codelabs."
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -12,6 +12,8 @@ dependencies:
   flame_forge2d: ^0.18.1
   flutter:
     sdk: flutter
+  flutter_soloud: ^2.1.0
+  logging: ^1.2.0
   xml: ^6.5.0
 
 dev_dependencies:
@@ -26,3 +28,5 @@ flutter:
   assets:
     - assets/images/
     - assets/tiles/
+    - assets/audio/music/
+    - assets/audio/sfx/
